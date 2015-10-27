@@ -1,0 +1,363 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="DataModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
+        <EntityContainer Name="DataModelTargetContainer" >
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="DataModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="DataModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="event_types" EntityType="DataModel.event_types" />
+          <EntitySet Name="locations" EntityType="DataModel.locations" />
+          <EntitySet Name="seats" EntityType="DataModel.seats" />
+          <EntitySet Name="events" EntityType="DataModel.events" />
+          <EntitySet Name="event_seating" EntityType="DataModel.event_seating" />
+          <EntitySet Name="group_requests" EntityType="DataModel.group_requests" />
+          <EntitySet Name="people" EntityType="DataModel.people" />
+          <EntitySet Name="seasons" EntityType="DataModel.seasons" />
+          <EntitySet Name="guests" EntityType="DataModel.guests" />
+          <AssociationSet Name="event_typesevents" Association="DataModel.event_typesevents">
+            <End Role="event_types" EntitySet="event_types" />
+            <End Role="events" EntitySet="events" />
+          </AssociationSet>
+          <AssociationSet Name="locationsevents" Association="DataModel.locationsevents">
+            <End Role="locations" EntitySet="locations" />
+            <End Role="events" EntitySet="events" />
+          </AssociationSet>
+          <AssociationSet Name="locationsseats" Association="DataModel.locationsseats">
+            <End Role="locations" EntitySet="locations" />
+            <End Role="seats" EntitySet="seats" />
+          </AssociationSet>
+          <AssociationSet Name="seasonsevents" Association="DataModel.seasonsevents">
+            <End Role="seasons" EntitySet="seasons" />
+            <End Role="events" EntitySet="events" />
+          </AssociationSet>
+          <AssociationSet Name="peopleevent_seating" Association="DataModel.peopleevent_seating">
+            <End Role="people" EntitySet="people" />
+            <End Role="event_seating" EntitySet="event_seating" />
+          </AssociationSet>
+          <AssociationSet Name="peoplegroup_requests" Association="DataModel.peoplegroup_requests">
+            <End Role="people" EntitySet="people" />
+            <End Role="group_requests" EntitySet="group_requests" />
+          </AssociationSet>
+          <AssociationSet Name="seatsevent_seating" Association="DataModel.seatsevent_seating">
+            <End Role="seats" EntitySet="seats" />
+            <End Role="event_seating" EntitySet="event_seating" />
+          </AssociationSet>
+          <AssociationSet Name="eventsevent_seating" Association="DataModel.eventsevent_seating">
+            <End Role="events" EntitySet="events" />
+            <End Role="event_seating" EntitySet="event_seating" />
+          </AssociationSet>
+          <AssociationSet Name="eventsgroup_requests" Association="DataModel.eventsgroup_requests">
+            <End Role="events" EntitySet="events" />
+            <End Role="group_requests" EntitySet="group_requests" />
+          </AssociationSet>
+          <AssociationSet Name="peoplegroup_requests1" Association="DataModel.peoplegroup_requests1">
+            <End Role="people" EntitySet="people" />
+            <End Role="group_requests" EntitySet="group_requests" />
+          </AssociationSet>
+          <AssociationSet Name="seasonspeople" Association="DataModel.seasonspeople">
+            <End Role="seasons" EntitySet="seasons" />
+            <End Role="people" EntitySet="people" />
+          </AssociationSet>
+          <AssociationSet Name="guestspeople" Association="DataModel.guestspeople">
+            <End Role="guests" EntitySet="guests" />
+            <End Role="people" EntitySet="people" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="event_types">
+          <Key>
+            <PropertyRef Name="event_type_id" />
+          </Key>
+          <Property Name="event_type_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Nullable="false" Type="String" />
+          <NavigationProperty Name="events" Relationship="DataModel.event_typesevents" FromRole="event_types" ToRole="events" />
+        </EntityType>
+        <EntityType Name="locations">
+          <Key>
+            <PropertyRef Name="location_id" />
+          </Key>
+          <Property Name="location_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" />
+          <Property Name="total_seats" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="events" Relationship="DataModel.locationsevents" FromRole="locations" ToRole="events" />
+          <NavigationProperty Name="seats" Relationship="DataModel.locationsseats" FromRole="locations" ToRole="seats" />
+        </EntityType>
+        <EntityType Name="seats">
+          <Key>
+            <PropertyRef Name="seat_id" />
+          </Key>
+          <Property Name="seat_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="location_id" Type="Int32" Nullable="false" />
+          <Property Name="is_balcony" Type="Boolean" Nullable="false" />
+          <Property Name="is_prime" Type="Boolean" Nullable="false" />
+          <Property Name="seat_row" Type="String" Nullable="false" MaxLength="3" />
+          <Property Name="seat_section" Type="String" Nullable="false" MaxLength="3" />
+          <Property Name="seat_number" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="location" Relationship="DataModel.locationsseats" FromRole="seats" ToRole="locations" />
+          <NavigationProperty Name="event_seating" Relationship="DataModel.seatsevent_seating" FromRole="seats" ToRole="event_seating" />
+        </EntityType>
+        <EntityType Name="events">
+          <Key>
+            <PropertyRef Name="event_id" />
+          </Key>
+          <Property Name="event_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="location_id" Type="Int32" Nullable="false" />
+          <Property Name="event_type_id" Type="Int32" Nullable="false" />
+          <Property Name="season_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" />
+          <Property Name="description" Type="String" Nullable="false" />
+          <Property Name="date_start" Type="DateTime" Nullable="false" />
+          <Property Name="date_end" Type="DateTime" Nullable="false" />
+          <Property Name="regular_price" Type="Decimal" Nullable="false" />
+          <Property Name="prime_price" Type="Decimal" Nullable="false" />
+          <NavigationProperty Name="event_type" Relationship="DataModel.event_typesevents" FromRole="events" ToRole="event_types" />
+          <NavigationProperty Name="location" Relationship="DataModel.locationsevents" FromRole="events" ToRole="locations" />
+          <NavigationProperty Name="season" Relationship="DataModel.seasonsevents" FromRole="events" ToRole="seasons" />
+          <NavigationProperty Name="event_seating" Relationship="DataModel.eventsevent_seating" FromRole="events" ToRole="event_seating" />
+          <NavigationProperty Name="group_requests" Relationship="DataModel.eventsgroup_requests" FromRole="events" ToRole="group_requests" />
+        </EntityType>
+        <EntityType Name="event_seating">
+          <Key>
+            <PropertyRef Name="seat_id" />
+            <PropertyRef Name="event_id" />
+          </Key>
+          <Property Name="seat_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="event_id" Type="Int32" Nullable="false" />
+          <Property Name="person_id" Type="Int32" Nullable="false" />
+          <Property Name="reserved_type" Type="String" Nullable="false" />
+          <NavigationProperty Name="person" Relationship="DataModel.peopleevent_seating" FromRole="event_seating" ToRole="people" />
+          <NavigationProperty Name="seat" Relationship="DataModel.seatsevent_seating" FromRole="event_seating" ToRole="seats" />
+          <NavigationProperty Name="event" Relationship="DataModel.eventsevent_seating" FromRole="event_seating" ToRole="events" />
+        </EntityType>
+        <EntityType Name="group_requests">
+          <Key>
+            <PropertyRef Name="event_id" />
+            <PropertyRef Name="requester_id" />
+            <PropertyRef Name="requested_id" />
+          </Key>
+          <Property Name="event_id" Type="Int32" Nullable="false" />
+          <Property Name="requester_id" Type="Int32" Nullable="false" />
+          <Property Name="requested_id" Type="Int32" Nullable="false" />
+          <Property Name="has_accepted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="requested" Relationship="DataModel.peoplegroup_requests" FromRole="group_requests" ToRole="people" />
+          <NavigationProperty Name="event" Relationship="DataModel.eventsgroup_requests" FromRole="group_requests" ToRole="events" />
+          <NavigationProperty Name="requester" Relationship="DataModel.peoplegroup_requests1" FromRole="group_requests" ToRole="people" />
+        </EntityType>
+        <EntityType Name="people">
+          <Key>
+            <PropertyRef Name="person_id" />
+          </Key>
+          <Property Name="person_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="student_id" Type="String" Nullable="false" />
+          <Property Name="teacher_id" Type="String" Nullable="false" />
+          <Property Name="guest_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="event_seating" Relationship="DataModel.peopleevent_seating" FromRole="people" ToRole="event_seating" />
+          <NavigationProperty Name="group_requests" Relationship="DataModel.peoplegroup_requests" FromRole="people" ToRole="group_requests" />
+          <NavigationProperty Name="group_requests1" Relationship="DataModel.peoplegroup_requests1" FromRole="people" ToRole="group_requests" />
+          <Property Name="season_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="season" Relationship="DataModel.seasonspeople" FromRole="people" ToRole="seasons" />
+          <NavigationProperty Name="guest" Relationship="DataModel.guestspeople" FromRole="people" ToRole="guests" />
+        </EntityType>
+        <EntityType Name="seasons">
+          <Key>
+            <PropertyRef Name="season_id" />
+          </Key>
+          <Property Name="season_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="events" Relationship="DataModel.seasonsevents" FromRole="seasons" ToRole="events" />
+          <NavigationProperty Name="people" Relationship="DataModel.seasonspeople" FromRole="seasons" ToRole="people" />
+        </EntityType>
+        <EntityType Name="guests">
+          <Key>
+            <PropertyRef Name="guest_id" />
+          </Key>
+          <Property Name="guest_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="first_name" Type="String" Nullable="false" />
+          <Property Name="last_name" Type="String" Nullable="false" />
+          <Property Name="email" Type="String" Nullable="false" />
+          <Property Name="password" Type="String" Nullable="false" />
+          <NavigationProperty Name="people" Relationship="DataModel.guestspeople" FromRole="guests" ToRole="people" />
+        </EntityType>
+        <Association Name="event_typesevents">
+          <End Type="DataModel.event_types" Role="event_types" Multiplicity="1" />
+          <End Type="DataModel.events" Role="events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="event_types">
+              <PropertyRef Name="event_type_id" />
+            </Principal>
+            <Dependent Role="events">
+              <PropertyRef Name="event_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="locationsevents">
+          <End Type="DataModel.locations" Role="locations" Multiplicity="1" />
+          <End Type="DataModel.events" Role="events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="locations">
+              <PropertyRef Name="location_id" />
+            </Principal>
+            <Dependent Role="events">
+              <PropertyRef Name="location_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="locationsseats">
+          <End Type="DataModel.locations" Role="locations" Multiplicity="1" />
+          <End Type="DataModel.seats" Role="seats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="locations">
+              <PropertyRef Name="location_id" />
+            </Principal>
+            <Dependent Role="seats">
+              <PropertyRef Name="location_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="seasonsevents">
+          <End Type="DataModel.seasons" Role="seasons" Multiplicity="1" />
+          <End Type="DataModel.events" Role="events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="seasons">
+              <PropertyRef Name="season_id" />
+            </Principal>
+            <Dependent Role="events">
+              <PropertyRef Name="season_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="peopleevent_seating">
+          <End Type="DataModel.people" Role="people" Multiplicity="1" />
+          <End Type="DataModel.event_seating" Role="event_seating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="people">
+              <PropertyRef Name="person_id" />
+            </Principal>
+            <Dependent Role="event_seating">
+              <PropertyRef Name="person_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="peoplegroup_requests">
+          <End Type="DataModel.people" Role="people" Multiplicity="1" />
+          <End Type="DataModel.group_requests" Role="group_requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="people">
+              <PropertyRef Name="person_id" />
+            </Principal>
+            <Dependent Role="group_requests">
+              <PropertyRef Name="requested_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="seatsevent_seating">
+          <End Type="DataModel.seats" Role="seats" Multiplicity="1" />
+          <End Type="DataModel.event_seating" Role="event_seating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="seats">
+              <PropertyRef Name="seat_id" />
+            </Principal>
+            <Dependent Role="event_seating">
+              <PropertyRef Name="seat_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="eventsevent_seating">
+          <End Type="DataModel.events" Role="events" Multiplicity="1" />
+          <End Type="DataModel.event_seating" Role="event_seating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="events">
+              <PropertyRef Name="event_id" />
+            </Principal>
+            <Dependent Role="event_seating">
+              <PropertyRef Name="event_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="eventsgroup_requests">
+          <End Type="DataModel.events" Role="events" Multiplicity="1" />
+          <End Type="DataModel.group_requests" Role="group_requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="events">
+              <PropertyRef Name="event_id" />
+            </Principal>
+            <Dependent Role="group_requests">
+              <PropertyRef Name="event_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="peoplegroup_requests1">
+          <End Type="DataModel.people" Role="people" Multiplicity="1" />
+          <End Type="DataModel.group_requests" Role="group_requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="people">
+              <PropertyRef Name="person_id" />
+            </Principal>
+            <Dependent Role="group_requests">
+              <PropertyRef Name="requester_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="seasonspeople">
+          <End Type="DataModel.seasons" Role="seasons" Multiplicity="1" />
+          <End Type="DataModel.people" Role="people" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="seasons">
+              <PropertyRef Name="season_id" />
+            </Principal>
+            <Dependent Role="people">
+              <PropertyRef Name="season_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="guestspeople">
+          <End Type="DataModel.guests" Role="guests" Multiplicity="1" />
+          <End Type="DataModel.people" Role="people" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guests">
+              <PropertyRef Name="guest_id" />
+            </Principal>
+            <Dependent Role="people">
+              <PropertyRef Name="guest_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="DataModel" />
+        <Alias Key="Target" Value="DataModel.Store" />
+        <EntityContainerMapping CdmEntityContainer="DataModelContainer" StorageEntityContainer="DataModelTargetContainer">
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
