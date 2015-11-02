@@ -1,6 +1,6 @@
 ﻿using System.Configuration;
 using System.Web.Mvc;
-using Oracle.DataAccess.Client;
+using Oracle.ManagedDataAccess.Client;
 
 namespace Aphro.Controllers
 {
