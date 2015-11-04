@@ -1,0 +1,106 @@
+[
+  {
+    "type": "map",
+    "data": [
+      {
+        "name": "E",
+        "section": "A",
+        "row": "E",
+        "start-seat": 1,
+        "end-seat": 8,
+        "in-balcony": false,
+        "path": "M854,13654,738,14028,809,14069,913,13713,854,13654z"
+      },
+      {
+        "name": "F",
+        "section": "A",
+        "row": "F",
+        "start-seat": 1,
+        "end-seat": 9,
+        "in-balcony": false,
+        "path": "M796,13596,664,13985,738,14028,854,13654,796,13596z"
+      },
+      {
+        "name": "G",
+        "section": "A",
+        "row": "G",
+        "start-seat": 1,
+        "end-seat": 9,
+        "in-balcony": false,
+        "path": "M739,13537,590,13943,664,13985,796,13596,739,13537z"
+      },
+      {
+        "name": "H",
+        "section": "A",
+        "row": "H",
+        "start-seat": 1,
+        "end-seat": 10,
+        "in-balcony": false,
+        "path": "M681,13479,516,13901,590,13943,739,13537,681,13479z"
+      },
+      {
+        "name": "J",
+        "section": "A",
+        "row": "J",
+        "start-seat": 1,
+        "end-seat": 10,
+        "in-balcony": false,
+        "path": "M623,13420,443,13858,516,13901,681,13479,623,13420z"
+      },
+      {
+        "name": "K",
+        "section": "A",
+        "row": "K",
+        "start-seat": 1,
+        "end-seat": 11,
+        "in-balcony": false,
+        "path": "M565,13362,369,13816,443,13858,623,13420,565,13362z"
+      },
+      {
+        "name": "L",
+        "section": "A",
+        "row": "L",
+        "start-seat": 1,
+        "end-seat": 11,
+        "in-balcony": false,
+        "path": "M507,13303,295,13773,369,13816,565,13362,507,13303z"
+      },
+      {
+        "name": "M",
+        "section": "A",
+        "row": "M",
+        "start-seat": 1,
+        "end-seat": 12,
+        "in-balcony": false,
+        "path": "M449,13245,221,13731,295,13773,507,13303,449,13245z"
+      },
+      {
+        "name": "N",
+        "section": "A",
+        "row": "N",
+        "start-seat": 1,
+        "end-seat": 12,
+        "in-balcony": false,
+        "path": "M391,13187,147,13688,221,13731,449,13245,391,13187z"
+      },
+      {
+        "name": "P",
+        "section": "A",
+        "row": "P",
+        "start-seat": 1,
+        "end-seat": 12,
+        "in-balcony": false,
+        "path": "M334,13128,74,13646,147,13688,391,13187,334,13128z"
+      },
+      {
+        "name": "Q",
+        "section": "A",
+        "row": "Q",
+        "start-seat": 1,
+        "end-seat": 11,
+        "in-balcony": false,
+        "path": "M275,13069,0,13603,74,13646,334,13128,275,13069z"
+      }
+    ]
+  }
+]

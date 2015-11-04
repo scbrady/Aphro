@@ -141,6 +141,18 @@
     <Content Include="Models\DataModel.edmx.diagram">
       <DependentUpon>DataModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\Json\cc-main-d.json" />
+    <Content Include="Content\Json\cc-main-a.json" />
+    <Content Include="Content\Json\cc-main-b.json" />
+    <Content Include="Content\Json\cc-main-c.json" />
+    <Content Include="Content\Json\cc-main-e.json" />
+    <Content Include="Content\Json\cc-main-f.json" />
+    <Content Include="Content\Json\cc-main-g.json" />
+    <Content Include="Content\Json\cc-main-h.json" />
+    <Content Include="Content\Json\cc-main-j.json" />
+    <Content Include="Content\Json\cc-main-k.json" />
+    <Content Include="Content\Json\cc-main-l.json" />
+    <Content Include="Content\Json\cc-main-m.json" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Global.asax" />
     <Content Include="Models\DataModel.edmx.sql" />
@@ -151,6 +163,9 @@
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\highmaps\data.js" />
+    <Content Include="Scripts\highmaps\drilldown.js" />
+    <Content Include="Scripts\highmaps\highmaps.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -218,6 +233,7 @@
     <Content Include="Views\Guest\Index.cshtml" />
     <Content Include="Views\Guest\Register.cshtml" />
     <Content Include="Views\Guest\Login.cshtml" />
+    <Content Include="Views\Home\Seating.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -10,6 +10,11 @@ namespace Aphro
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/highmaps").Include(
+                        "~/Scripts/highmaps/highmaps.js",
+                        "~/Scripts/highmaps/data.js",
+                        "~/Scripts/highmaps/drilldown.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
 
