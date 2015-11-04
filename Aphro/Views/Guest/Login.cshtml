@@ -16,7 +16,7 @@
         @Html.AntiForgeryToken()
         @if (ViewBag.Message != null)
         {
-            <div style="border:solid 1px green">
+            <div style="border: solid 1px green">
                 @ViewBag.Message
             </div>
         }
@@ -37,13 +37,14 @@
         </div>
 
         <p>
-            <input type="submit" value="Login" />
+            <input type="submit" value="Login"/>
         </p>
     </fieldset>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to Guest Page", "Index")<br />
+    @Html.ActionLink("Don't have an account?", "Register")
 </div>
 
 @section Scripts {

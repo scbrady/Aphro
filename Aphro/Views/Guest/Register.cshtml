@@ -66,9 +66,12 @@
     }
 
     <div>
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Back to Guest Page", "Index")<br />
+        @Html.ActionLink("Already have an account?", "Login")
     </div>
+</section>
 
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
     }
+    
