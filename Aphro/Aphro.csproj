@@ -44,6 +44,10 @@
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="DevOne.Security.Cryptography.BCrypt, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\BCrypt.1.0.0.0\lib\DevOne.Security.Cryptography.BCrypt.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -180,6 +184,7 @@
     <Compile Include="Models\group_requests.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Guest.cs" />
     <Compile Include="Models\guests.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -201,6 +206,7 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\GuestLogin.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -211,6 +217,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Guest\Index.cshtml" />
     <Content Include="Views\Guest\Register.cshtml" />
+    <Content Include="Views\Guest\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
