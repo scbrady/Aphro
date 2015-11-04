@@ -1,7 +1,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for Oracle database
 -- --------------------------------------------------
--- Date Created: 10/27/2015 8:24:48 PM
+-- Date Created: 11/2/2015 9:48:12 AM
 -- Generated from EDMX file: C:\Code\Project Class\Aphro\Aphro\Aphro\Models\DataModel.edmx
 -- --------------------------------------------------
 
@@ -9,50 +9,49 @@
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
--- ALTER TABLE "csdb"."events" DROP CONSTRAINT "FK_event_typesevents" CASCADE;
+ ALTER TABLE "TEAMAPHRO"."events" DROP CONSTRAINT "FK_event_typesevents" CASCADE;
 
--- ALTER TABLE "csdb"."events" DROP CONSTRAINT "FK_locationsevents" CASCADE;
+ ALTER TABLE "TEAMAPHRO"."event_seating" DROP CONSTRAINT "FK_eventsevent_seating" CASCADE;
 
--- ALTER TABLE "csdb"."seats" DROP CONSTRAINT "FK_locationsseats" CASCADE;
+ ALTER TABLE "TEAMAPHRO"."group_requests" DROP CONSTRAINT "FK_eventsgroup_requests" CASCADE;
 
--- ALTER TABLE "csdb"."events" DROP CONSTRAINT "FK_seasonsevents" CASCADE;
+ ALTER TABLE "TEAMAPHRO"."people" DROP CONSTRAINT "FK_guestspeople" CASCADE;
 
--- ALTER TABLE "csdb"."event_seating" DROP CONSTRAINT "FK_peopleevent_seating" CASCADE;
+ ALTER TABLE "TEAMAPHRO"."events" DROP CONSTRAINT "FK_locationsevents" CASCADE;
 
--- ALTER TABLE "csdb"."group_requests" DROP CONSTRAINT "FK_peoplegroup_requests" CASCADE;
+ ALTER TABLE "TEAMAPHRO"."seats" DROP CONSTRAINT "FK_locationsseats" CASCADE;
 
--- ALTER TABLE "csdb"."event_seating" DROP CONSTRAINT "FK_seatsevent_seating" CASCADE;
+ ALTER TABLE "TEAMAPHRO"."event_seating" DROP CONSTRAINT "FK_peopleevent_seating" CASCADE;
 
--- ALTER TABLE "csdb"."event_seating" DROP CONSTRAINT "FK_eventsevent_seating" CASCADE;
+ ALTER TABLE "TEAMAPHRO"."group_requests" DROP CONSTRAINT "FK_peoplegroup_requests" CASCADE;
 
--- ALTER TABLE "csdb"."group_requests" DROP CONSTRAINT "FK_eventsgroup_requests" CASCADE;
+ ALTER TABLE "TEAMAPHRO"."group_requests" DROP CONSTRAINT "FK_peoplegroup_requests1" CASCADE;
 
--- ALTER TABLE "csdb"."group_requests" DROP CONSTRAINT "FK_peoplegroup_requests1" CASCADE;
+ ALTER TABLE "TEAMAPHRO"."events" DROP CONSTRAINT "FK_seasonsevents" CASCADE;
+ ALTER TABLE "TEAMAPHRO"."people" DROP CONSTRAINT "FK_seasonspeople" CASCADE;
 
--- ALTER TABLE "csdb"."people" DROP CONSTRAINT "FK_seasonspeople" CASCADE;
-
--- ALTER TABLE "csdb"."people" DROP CONSTRAINT "FK_guestspeople" CASCADE;
+ ALTER TABLE "TEAMAPHRO"."event_seating" DROP CONSTRAINT "FK_seatsevent_seating" CASCADE;
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
--- DROP TABLE "csdb"."event_types";
+ DROP TABLE "TEAMAPHRO"."event_seating";
 
--- DROP TABLE "csdb"."locations";
+ DROP TABLE "TEAMAPHRO"."event_types";
 
--- DROP TABLE "csdb"."seats";
+ DROP TABLE "TEAMAPHRO"."events";
 
--- DROP TABLE "csdb"."events";
+ DROP TABLE "TEAMAPHRO"."group_requests";
 
--- DROP TABLE "csdb"."event_seating";
+ DROP TABLE "TEAMAPHRO"."guests";
 
--- DROP TABLE "csdb"."group_requests";
+ DROP TABLE "TEAMAPHRO"."locations";
 
--- DROP TABLE "csdb"."people";
+ DROP TABLE "TEAMAPHRO"."people";
 
--- DROP TABLE "csdb"."seasons";
+ DROP TABLE "TEAMAPHRO"."seasons";
 
--- DROP TABLE "csdb"."guests";
+ DROP TABLE "TEAMAPHRO"."seats";
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -61,13 +60,13 @@
 -- Creating table 'event_types'
 CREATE TABLE "TEAMAPHRO"."event_types" (
    "event_type_id" NUMBER(10) NOT NULL,
-   "name" NCLOB NOT NULL
+   "name" NVARCHAR2(20) NOT NULL
 );
 
 -- Creating table 'locations'
 CREATE TABLE "TEAMAPHRO"."locations" (
    "location_id" NUMBER(10) NOT NULL,
-   "name" NCLOB NOT NULL,
+   "name" NVARCHAR2(20) NOT NULL,
    "total_seats" NUMBER(10) NOT NULL
 );
 
@@ -88,8 +87,8 @@ CREATE TABLE "TEAMAPHRO"."events" (
    "location_id" NUMBER(10) NOT NULL,
    "event_type_id" NUMBER(10) NOT NULL,
    "season_id" NUMBER(10) NOT NULL,
-   "name" NCLOB NOT NULL,
-   "description" NCLOB NOT NULL,
+   "name" NVARCHAR2(20) NOT NULL,
+   "description" NVARCHAR2(20) NOT NULL,
    "date_start" DATE NOT NULL,
    "date_end" DATE NOT NULL,
    "regular_price" NUMBER(38) NOT NULL,
@@ -101,7 +100,7 @@ CREATE TABLE "TEAMAPHRO"."event_seating" (
    "seat_id" NUMBER(10) NOT NULL,
    "event_id" NUMBER(10) NOT NULL,
    "person_id" NUMBER(10) NOT NULL,
-   "reserved_type" NCLOB NOT NULL
+   "reserved_type" NVARCHAR2(20) NOT NULL
 );
 
 -- Creating table 'group_requests'
@@ -115,8 +114,8 @@ CREATE TABLE "TEAMAPHRO"."group_requests" (
 -- Creating table 'people'
 CREATE TABLE "TEAMAPHRO"."people" (
    "person_id" NUMBER(10) NOT NULL,
-   "student_id" NCLOB NOT NULL,
-   "teacher_id" NCLOB NOT NULL,
+   "student_id" NVARCHAR2(20) NOT NULL,
+   "teacher_id" NVARCHAR2(20) NOT NULL,
    "guest_id" NUMBER(10) NOT NULL,
    "season_id" NUMBER(10) NOT NULL
 );
@@ -124,17 +123,18 @@ CREATE TABLE "TEAMAPHRO"."people" (
 -- Creating table 'seasons'
 CREATE TABLE "TEAMAPHRO"."seasons" (
    "season_id" NUMBER(10) NOT NULL,
-   "name" NCLOB NOT NULL,
+   "name" NVARCHAR2(20) NOT NULL,
    "created_at" DATE NOT NULL
 );
 
 -- Creating table 'guests'
 CREATE TABLE "TEAMAPHRO"."guests" (
    "guest_id" NUMBER(10) NOT NULL,
-   "first_name" NCLOB NOT NULL,
-   "last_name" NCLOB NOT NULL,
-   "email" NCLOB NOT NULL,
-   "password" NCLOB NOT NULL
+   "first_name" NVARCHAR2(20) NOT NULL,
+   "last_name" NVARCHAR2(20) NOT NULL,
+   "email" NVARCHAR2(20) NOT NULL,
+   "password" NVARCHAR2(50) NOT NULL,
+   "salt" NVARCHAR2(50) NOT NULL
 );
 
 
