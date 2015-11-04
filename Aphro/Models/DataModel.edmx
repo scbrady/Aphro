@@ -5,326 +5,302 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       
-    <Schema Namespace="DataModel.Store" Alias="Self" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator">
-        <EntityContainer Name="DataModelStoreContainer">
-            <EntitySet Name="event_types" EntityType="DataModel.Store.event_types" store:Type="Tables" Schema="TEAMAPHRO" />
-            <EntitySet Name="locations" EntityType="DataModel.Store.locations" store:Type="Tables" Schema="TEAMAPHRO" />
-            <EntitySet Name="seats" EntityType="DataModel.Store.seats" store:Type="Tables" Schema="TEAMAPHRO" />
-            <EntitySet Name="events" EntityType="DataModel.Store.events" store:Type="Tables" Schema="TEAMAPHRO" />
-            <EntitySet Name="event_seating" EntityType="DataModel.Store.event_seating" store:Type="Tables" Schema="TEAMAPHRO" />
-            <EntitySet Name="group_requests" EntityType="DataModel.Store.group_requests" store:Type="Tables" Schema="TEAMAPHRO" />
-            <EntitySet Name="people" EntityType="DataModel.Store.people" store:Type="Tables" Schema="TEAMAPHRO" />
-            <EntitySet Name="seasons" EntityType="DataModel.Store.seasons" store:Type="Tables" Schema="TEAMAPHRO" />
-            <EntitySet Name="guests" EntityType="DataModel.Store.guests" store:Type="Tables" Schema="TEAMAPHRO" />
-            <AssociationSet Name="event_typesevents" Association="DataModel.Store.event_typesevents">
-                <End Role="event_types" EntitySet="event_types" />
-                <End Role="events" EntitySet="events" />
-            </AssociationSet>
-            <AssociationSet Name="locationsevents" Association="DataModel.Store.locationsevents">
-                <End Role="locations" EntitySet="locations" />
-                <End Role="events" EntitySet="events" />
-            </AssociationSet>
-            <AssociationSet Name="locationsseats" Association="DataModel.Store.locationsseats">
-                <End Role="locations" EntitySet="locations" />
-                <End Role="seats" EntitySet="seats" />
-            </AssociationSet>
-            <AssociationSet Name="seasonsevents" Association="DataModel.Store.seasonsevents">
-                <End Role="seasons" EntitySet="seasons" />
-                <End Role="events" EntitySet="events" />
-            </AssociationSet>
-            <AssociationSet Name="peopleevent_seating" Association="DataModel.Store.peopleevent_seating">
-                <End Role="people" EntitySet="people" />
-                <End Role="event_seating" EntitySet="event_seating" />
-            </AssociationSet>
-            <AssociationSet Name="peoplegroup_requests" Association="DataModel.Store.peoplegroup_requests">
-                <End Role="people" EntitySet="people" />
-                <End Role="group_requests" EntitySet="group_requests" />
-            </AssociationSet>
-            <AssociationSet Name="seatsevent_seating" Association="DataModel.Store.seatsevent_seating">
-                <End Role="seats" EntitySet="seats" />
-                <End Role="event_seating" EntitySet="event_seating" />
-            </AssociationSet>
-            <AssociationSet Name="eventsevent_seating" Association="DataModel.Store.eventsevent_seating">
-                <End Role="events" EntitySet="events" />
-                <End Role="event_seating" EntitySet="event_seating" />
-            </AssociationSet>
-            <AssociationSet Name="eventsgroup_requests" Association="DataModel.Store.eventsgroup_requests">
-                <End Role="events" EntitySet="events" />
-                <End Role="group_requests" EntitySet="group_requests" />
-            </AssociationSet>
-            <AssociationSet Name="peoplegroup_requests1" Association="DataModel.Store.peoplegroup_requests1">
-                <End Role="people" EntitySet="people" />
-                <End Role="group_requests" EntitySet="group_requests" />
-            </AssociationSet>
-            <AssociationSet Name="seasonspeople" Association="DataModel.Store.seasonspeople">
-                <End Role="seasons" EntitySet="seasons" />
-                <End Role="people" EntitySet="people" />
-            </AssociationSet>
-            <AssociationSet Name="guestspeople" Association="DataModel.Store.guestspeople">
-                <End Role="guests" EntitySet="guests" />
-                <End Role="people" EntitySet="people" />
-            </AssociationSet>
-        </EntityContainer>
+    <Schema Namespace="DataModel.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityType Name="event_seating">
+          <Key>
+            <PropertyRef Name="seat_id" />
+            <PropertyRef Name="event_id" />
+          </Key>
+          <Property Name="seat_id" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="event_id" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="person_id" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="reserved_type" Type="nvarchar2" MaxLength="20" Nullable="false" />
+        </EntityType>
         <EntityType Name="event_types">
-            <Key>
-                <PropertyRef Name="event_type_id" />
-            </Key>
-            <Property Name="event_type_id" Type="number" Nullable="false" Precision="10" />
-            <Property Name="name" Type="nclob" Nullable="false" />
-        </EntityType>
-        <EntityType Name="locations">
-            <Key>
-                <PropertyRef Name="location_id" />
-            </Key>
-            <Property Name="location_id" Type="number" Nullable="false" Precision="10" />
-            <Property Name="name" Type="nclob" Nullable="false" />
-            <Property Name="total_seats" Type="number" Nullable="false" Precision="10" />
-        </EntityType>
-        <EntityType Name="seats">
-            <Key>
-                <PropertyRef Name="seat_id" />
-            </Key>
-            <Property Name="seat_id" Type="number" Nullable="false" Precision="10" />
-            <Property Name="location_id" Type="number" Nullable="false" Precision="10" />
-            <Property Name="is_balcony" Type="number" Nullable="false" Precision="1" />
-            <Property Name="is_prime" Type="number" Nullable="false" Precision="1" />
-            <Property Name="seat_row" Type="nvarchar2" Nullable="false" MaxLength="3" />
-            <Property Name="seat_section" Type="nvarchar2" Nullable="false" MaxLength="3" />
-            <Property Name="seat_number" Type="number" Nullable="false" Precision="10" />
+          <Key>
+            <PropertyRef Name="event_type_id" />
+          </Key>
+          <Property Name="event_type_id" Type="number" Precision="10" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="nvarchar2" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="events">
-            <Key>
-                <PropertyRef Name="event_id" />
-            </Key>
-            <Property Name="event_id" Type="number" Nullable="false" Precision="10" />
-            <Property Name="location_id" Type="number" Nullable="false" Precision="10" />
-            <Property Name="event_type_id" Type="number" Nullable="false" Precision="10" />
-            <Property Name="season_id" Type="number" Nullable="false" Precision="10" />
-            <Property Name="name" Type="nclob" Nullable="false" />
-            <Property Name="description" Type="nclob" Nullable="false" />
-            <Property Name="date_start" Type="date" Nullable="false" />
-            <Property Name="date_end" Type="date" Nullable="false" />
-            <Property Name="regular_price" Type="number" Nullable="false" Precision="38" />
-            <Property Name="prime_price" Type="number" Nullable="false" Precision="38" />
-        </EntityType>
-        <EntityType Name="event_seating">
-            <Key>
-                <PropertyRef Name="seat_id" />
-                <PropertyRef Name="event_id" />
-            </Key>
-            <Property Name="seat_id" Type="number" Nullable="false" Precision="10" />
-            <Property Name="event_id" Type="number" Nullable="false" Precision="10" />
-            <Property Name="person_id" Type="number" Nullable="false" Precision="10" />
-            <Property Name="reserved_type" Type="nclob" Nullable="false" />
+          <Key>
+            <PropertyRef Name="event_id" />
+          </Key>
+          <Property Name="event_id" Type="number" Precision="10" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="location_id" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="event_type_id" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="season_id" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="name" Type="nvarchar2" MaxLength="20" Nullable="false" />
+          <Property Name="description" Type="nvarchar2" MaxLength="20" Nullable="false" />
+          <Property Name="date_start" Type="date" Nullable="false" />
+          <Property Name="date_end" Type="date" Nullable="false" />
+          <Property Name="regular_price" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="prime_price" Type="number" Precision="38" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="group_requests">
-            <Key>
-                <PropertyRef Name="event_id" />
-                <PropertyRef Name="requester_id" />
-                <PropertyRef Name="requested_id" />
-            </Key>
-            <Property Name="event_id" Type="number" Nullable="false" Precision="10" />
-            <Property Name="requester_id" Type="number" Nullable="false" Precision="10" />
-            <Property Name="requested_id" Type="number" Nullable="false" Precision="10" />
-            <Property Name="has_accepted" Type="number" Nullable="false" Precision="1" />
-        </EntityType>
-        <EntityType Name="people">
-            <Key>
-                <PropertyRef Name="person_id" />
-            </Key>
-            <Property Name="person_id" Type="number" Nullable="false" Precision="10" />
-            <Property Name="student_id" Type="nclob" Nullable="false" />
-            <Property Name="teacher_id" Type="nclob" Nullable="false" />
-            <Property Name="guest_id" Type="number" Nullable="false" Precision="10" />
-            <Property Name="season_id" Type="number" Nullable="false" Precision="10" />
-        </EntityType>
-        <EntityType Name="seasons">
-            <Key>
-                <PropertyRef Name="season_id" />
-            </Key>
-            <Property Name="season_id" Type="number" Nullable="false" Precision="10" />
-            <Property Name="name" Type="nclob" Nullable="false" />
-            <Property Name="created_at" Type="date" Nullable="false" />
+          <Key>
+            <PropertyRef Name="event_id" />
+            <PropertyRef Name="requester_id" />
+            <PropertyRef Name="requested_id" />
+          </Key>
+          <Property Name="event_id" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="requester_id" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="requested_id" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="has_accepted" Type="number" Precision="1" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="guests">
-            <Key>
-                <PropertyRef Name="guest_id" />
-            </Key>
-            <Property Name="guest_id" Type="number" Nullable="false" Precision="10" />
-            <Property Name="first_name" Type="nclob" Nullable="false" />
-            <Property Name="last_name" Type="nclob" Nullable="false" />
-            <Property Name="email" Type="nclob" Nullable="false" />
-            <Property Name="password" Type="nclob" Nullable="false" />
+          <Key>
+            <PropertyRef Name="guest_id" />
+          </Key>
+          <Property Name="guest_id" Type="number" Precision="10" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="first_name" Type="nvarchar2" MaxLength="20" Nullable="false" />
+          <Property Name="last_name" Type="nvarchar2" MaxLength="20" Nullable="false" />
+          <Property Name="email" Type="nvarchar2" MaxLength="20" Nullable="false" />
+          <Property Name="password" Type="nvarchar2" MaxLength="60" Nullable="false" />
         </EntityType>
-    <Association Name="event_typesevents">
-        <End Role="event_types" Type="DataModel.Store.event_types" Multiplicity="1">
-        </End>
-        <End Role="events" Type="DataModel.Store.events" Multiplicity="*">
-        </End>
-        <ReferentialConstraint>
+        <EntityType Name="locations">
+          <Key>
+            <PropertyRef Name="location_id" />
+          </Key>
+          <Property Name="location_id" Type="number" Precision="10" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="nvarchar2" MaxLength="20" Nullable="false" />
+          <Property Name="total_seats" Type="number" Precision="10" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="people">
+          <Key>
+            <PropertyRef Name="person_id" />
+          </Key>
+          <Property Name="person_id" Type="number" Precision="10" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="student_id" Type="nvarchar2" MaxLength="20" Nullable="false" />
+          <Property Name="teacher_id" Type="nvarchar2" MaxLength="20" Nullable="false" />
+          <Property Name="guest_id" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="season_id" Type="number" Precision="10" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="seasons">
+          <Key>
+            <PropertyRef Name="season_id" />
+          </Key>
+          <Property Name="season_id" Type="number" Precision="10" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="nvarchar2" MaxLength="20" Nullable="false" />
+          <Property Name="created_at" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="seats">
+          <Key>
+            <PropertyRef Name="seat_id" />
+          </Key>
+          <Property Name="seat_id" Type="number" Precision="10" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="location_id" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="is_balcony" Type="number" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="is_prime" Type="number" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="seat_row" Type="nvarchar2" MaxLength="3" Nullable="false" />
+          <Property Name="seat_section" Type="nvarchar2" MaxLength="3" Nullable="false" />
+          <Property Name="seat_number" Type="number" Precision="10" Scale="0" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_event_typesevents">
+          <End Role="event_types" Type="Self.event_types" Multiplicity="1" />
+          <End Role="events" Type="Self.events" Multiplicity="*" />
+          <ReferentialConstraint>
             <Principal Role="event_types">
-                <PropertyRef Name="event_type_id" />
+              <PropertyRef Name="event_type_id" />
             </Principal>
             <Dependent Role="events">
-                <PropertyRef Name="event_type_id" />
+              <PropertyRef Name="event_type_id" />
             </Dependent>
-        </ReferentialConstraint>
-    </Association>
-    <Association Name="locationsevents">
-        <End Role="locations" Type="DataModel.Store.locations" Multiplicity="1">
-        </End>
-        <End Role="events" Type="DataModel.Store.events" Multiplicity="*">
-        </End>
-        <ReferentialConstraint>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_eventsevent_seating">
+          <End Role="events" Type="Self.events" Multiplicity="1" />
+          <End Role="event_seating" Type="Self.event_seating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="events">
+              <PropertyRef Name="event_id" />
+            </Principal>
+            <Dependent Role="event_seating">
+              <PropertyRef Name="event_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_eventsgroup_requests">
+          <End Role="events" Type="Self.events" Multiplicity="1" />
+          <End Role="group_requests" Type="Self.group_requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="events">
+              <PropertyRef Name="event_id" />
+            </Principal>
+            <Dependent Role="group_requests">
+              <PropertyRef Name="event_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_guestspeople">
+          <End Role="guests" Type="Self.guests" Multiplicity="1" />
+          <End Role="people" Type="Self.people" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="guests">
+              <PropertyRef Name="guest_id" />
+            </Principal>
+            <Dependent Role="people">
+              <PropertyRef Name="guest_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_locationsevents">
+          <End Role="locations" Type="Self.locations" Multiplicity="1" />
+          <End Role="events" Type="Self.events" Multiplicity="*" />
+          <ReferentialConstraint>
             <Principal Role="locations">
-                <PropertyRef Name="location_id" />
+              <PropertyRef Name="location_id" />
             </Principal>
             <Dependent Role="events">
-                <PropertyRef Name="location_id" />
+              <PropertyRef Name="location_id" />
             </Dependent>
-        </ReferentialConstraint>
-    </Association>
-    <Association Name="locationsseats">
-        <End Role="locations" Type="DataModel.Store.locations" Multiplicity="1">
-        </End>
-        <End Role="seats" Type="DataModel.Store.seats" Multiplicity="*">
-        </End>
-        <ReferentialConstraint>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_locationsseats">
+          <End Role="locations" Type="Self.locations" Multiplicity="1" />
+          <End Role="seats" Type="Self.seats" Multiplicity="*" />
+          <ReferentialConstraint>
             <Principal Role="locations">
-                <PropertyRef Name="location_id" />
+              <PropertyRef Name="location_id" />
             </Principal>
             <Dependent Role="seats">
-                <PropertyRef Name="location_id" />
+              <PropertyRef Name="location_id" />
             </Dependent>
-        </ReferentialConstraint>
-    </Association>
-    <Association Name="seasonsevents">
-        <End Role="seasons" Type="DataModel.Store.seasons" Multiplicity="1">
-        </End>
-        <End Role="events" Type="DataModel.Store.events" Multiplicity="*">
-        </End>
-        <ReferentialConstraint>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_peopleevent_seating">
+          <End Role="people" Type="Self.people" Multiplicity="1" />
+          <End Role="event_seating" Type="Self.event_seating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="people">
+              <PropertyRef Name="person_id" />
+            </Principal>
+            <Dependent Role="event_seating">
+              <PropertyRef Name="person_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_peoplegroup_requests">
+          <End Role="people" Type="Self.people" Multiplicity="1" />
+          <End Role="group_requests" Type="Self.group_requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="people">
+              <PropertyRef Name="person_id" />
+            </Principal>
+            <Dependent Role="group_requests">
+              <PropertyRef Name="requested_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_peoplegroup_requests1">
+          <End Role="people" Type="Self.people" Multiplicity="1" />
+          <End Role="group_requests" Type="Self.group_requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="people">
+              <PropertyRef Name="person_id" />
+            </Principal>
+            <Dependent Role="group_requests">
+              <PropertyRef Name="requester_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_seasonsevents">
+          <End Role="seasons" Type="Self.seasons" Multiplicity="1" />
+          <End Role="events" Type="Self.events" Multiplicity="*" />
+          <ReferentialConstraint>
             <Principal Role="seasons">
-                <PropertyRef Name="season_id" />
+              <PropertyRef Name="season_id" />
             </Principal>
             <Dependent Role="events">
-                <PropertyRef Name="season_id" />
+              <PropertyRef Name="season_id" />
             </Dependent>
-        </ReferentialConstraint>
-    </Association>
-    <Association Name="peopleevent_seating">
-        <End Role="people" Type="DataModel.Store.people" Multiplicity="1">
-        </End>
-        <End Role="event_seating" Type="DataModel.Store.event_seating" Multiplicity="*">
-        </End>
-        <ReferentialConstraint>
-            <Principal Role="people">
-                <PropertyRef Name="person_id" />
-            </Principal>
-            <Dependent Role="event_seating">
-                <PropertyRef Name="person_id" />
-            </Dependent>
-        </ReferentialConstraint>
-    </Association>
-    <Association Name="peoplegroup_requests">
-        <End Role="people" Type="DataModel.Store.people" Multiplicity="1">
-        </End>
-        <End Role="group_requests" Type="DataModel.Store.group_requests" Multiplicity="*">
-        </End>
-        <ReferentialConstraint>
-            <Principal Role="people">
-                <PropertyRef Name="person_id" />
-            </Principal>
-            <Dependent Role="group_requests">
-                <PropertyRef Name="requested_id" />
-            </Dependent>
-        </ReferentialConstraint>
-    </Association>
-    <Association Name="seatsevent_seating">
-        <End Role="seats" Type="DataModel.Store.seats" Multiplicity="1">
-        </End>
-        <End Role="event_seating" Type="DataModel.Store.event_seating" Multiplicity="*">
-        </End>
-        <ReferentialConstraint>
-            <Principal Role="seats">
-                <PropertyRef Name="seat_id" />
-            </Principal>
-            <Dependent Role="event_seating">
-                <PropertyRef Name="seat_id" />
-            </Dependent>
-        </ReferentialConstraint>
-    </Association>
-    <Association Name="eventsevent_seating">
-        <End Role="events" Type="DataModel.Store.events" Multiplicity="1">
-        </End>
-        <End Role="event_seating" Type="DataModel.Store.event_seating" Multiplicity="*">
-        </End>
-        <ReferentialConstraint>
-            <Principal Role="events">
-                <PropertyRef Name="event_id" />
-            </Principal>
-            <Dependent Role="event_seating">
-                <PropertyRef Name="event_id" />
-            </Dependent>
-        </ReferentialConstraint>
-    </Association>
-    <Association Name="eventsgroup_requests">
-        <End Role="events" Type="DataModel.Store.events" Multiplicity="1">
-        </End>
-        <End Role="group_requests" Type="DataModel.Store.group_requests" Multiplicity="*">
-        </End>
-        <ReferentialConstraint>
-            <Principal Role="events">
-                <PropertyRef Name="event_id" />
-            </Principal>
-            <Dependent Role="group_requests">
-                <PropertyRef Name="event_id" />
-            </Dependent>
-        </ReferentialConstraint>
-    </Association>
-    <Association Name="peoplegroup_requests1">
-        <End Role="people" Type="DataModel.Store.people" Multiplicity="1">
-        </End>
-        <End Role="group_requests" Type="DataModel.Store.group_requests" Multiplicity="*">
-        </End>
-        <ReferentialConstraint>
-            <Principal Role="people">
-                <PropertyRef Name="person_id" />
-            </Principal>
-            <Dependent Role="group_requests">
-                <PropertyRef Name="requester_id" />
-            </Dependent>
-        </ReferentialConstraint>
-    </Association>
-    <Association Name="seasonspeople">
-        <End Role="seasons" Type="DataModel.Store.seasons" Multiplicity="1">
-        </End>
-        <End Role="people" Type="DataModel.Store.people" Multiplicity="*">
-        </End>
-        <ReferentialConstraint>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_seasonspeople">
+          <End Role="seasons" Type="Self.seasons" Multiplicity="1" />
+          <End Role="people" Type="Self.people" Multiplicity="*" />
+          <ReferentialConstraint>
             <Principal Role="seasons">
-                <PropertyRef Name="season_id" />
+              <PropertyRef Name="season_id" />
             </Principal>
             <Dependent Role="people">
-                <PropertyRef Name="season_id" />
+              <PropertyRef Name="season_id" />
             </Dependent>
-        </ReferentialConstraint>
-    </Association>
-    <Association Name="guestspeople">
-        <End Role="guests" Type="DataModel.Store.guests" Multiplicity="1">
-        </End>
-        <End Role="people" Type="DataModel.Store.people" Multiplicity="*">
-        </End>
-        <ReferentialConstraint>
-            <Principal Role="guests">
-                <PropertyRef Name="guest_id" />
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_seatsevent_seating">
+          <End Role="seats" Type="Self.seats" Multiplicity="1" />
+          <End Role="event_seating" Type="Self.event_seating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="seats">
+              <PropertyRef Name="seat_id" />
             </Principal>
-            <Dependent Role="people">
-                <PropertyRef Name="guest_id" />
+            <Dependent Role="event_seating">
+              <PropertyRef Name="seat_id" />
             </Dependent>
-        </ReferentialConstraint>
-    </Association>
-</Schema></edmx:StorageModels>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DataModelStoreContainer">
+          <EntitySet Name="event_seating" EntityType="Self.event_seating" Schema="TEAMAPHRO" store:Type="Tables" />
+          <EntitySet Name="event_types" EntityType="Self.event_types" Schema="TEAMAPHRO" store:Type="Tables" />
+          <EntitySet Name="events" EntityType="Self.events" Schema="TEAMAPHRO" store:Type="Tables" />
+          <EntitySet Name="group_requests" EntityType="Self.group_requests" Schema="TEAMAPHRO" store:Type="Tables" />
+          <EntitySet Name="guests" EntityType="Self.guests" Schema="TEAMAPHRO" store:Type="Tables" />
+          <EntitySet Name="locations" EntityType="Self.locations" Schema="TEAMAPHRO" store:Type="Tables" />
+          <EntitySet Name="people" EntityType="Self.people" Schema="TEAMAPHRO" store:Type="Tables" />
+          <EntitySet Name="seasons" EntityType="Self.seasons" Schema="TEAMAPHRO" store:Type="Tables" />
+          <EntitySet Name="seats" EntityType="Self.seats" Schema="TEAMAPHRO" store:Type="Tables" />
+          <AssociationSet Name="FK_event_typesevents" Association="Self.FK_event_typesevents">
+            <End Role="event_types" EntitySet="event_types" />
+            <End Role="events" EntitySet="events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_eventsevent_seating" Association="Self.FK_eventsevent_seating">
+            <End Role="events" EntitySet="events" />
+            <End Role="event_seating" EntitySet="event_seating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_eventsgroup_requests" Association="Self.FK_eventsgroup_requests">
+            <End Role="events" EntitySet="events" />
+            <End Role="group_requests" EntitySet="group_requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_guestspeople" Association="Self.FK_guestspeople">
+            <End Role="guests" EntitySet="guests" />
+            <End Role="people" EntitySet="people" />
+          </AssociationSet>
+          <AssociationSet Name="FK_locationsevents" Association="Self.FK_locationsevents">
+            <End Role="locations" EntitySet="locations" />
+            <End Role="events" EntitySet="events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_locationsseats" Association="Self.FK_locationsseats">
+            <End Role="locations" EntitySet="locations" />
+            <End Role="seats" EntitySet="seats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_peopleevent_seating" Association="Self.FK_peopleevent_seating">
+            <End Role="people" EntitySet="people" />
+            <End Role="event_seating" EntitySet="event_seating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_peoplegroup_requests" Association="Self.FK_peoplegroup_requests">
+            <End Role="people" EntitySet="people" />
+            <End Role="group_requests" EntitySet="group_requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_peoplegroup_requests1" Association="Self.FK_peoplegroup_requests1">
+            <End Role="people" EntitySet="people" />
+            <End Role="group_requests" EntitySet="group_requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_seasonsevents" Association="Self.FK_seasonsevents">
+            <End Role="seasons" EntitySet="seasons" />
+            <End Role="events" EntitySet="events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_seasonspeople" Association="Self.FK_seasonspeople">
+            <End Role="seasons" EntitySet="seasons" />
+            <End Role="people" EntitySet="people" />
+          </AssociationSet>
+          <AssociationSet Name="FK_seatsevent_seating" Association="Self.FK_seatsevent_seating">
+            <End Role="seats" EntitySet="seats" />
+            <End Role="event_seating" EntitySet="event_seating" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DataModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
@@ -769,6 +745,7 @@
         <edmx:DesignerProperty Name="DDLGenerationTemplate" Value="$(VSEFTools)\DBGen\SSDLToOracle.tt" />
         <edmx:DesignerProperty Name="UseLegacyProvider" Value="True" />
         <edmx:DesignerProperty Name="DatabaseGenerationWorkflow" Value="$(VSEFTools)\DBGen\Generate Oracle Via T4 (TPT).xaml" />
+        <edmx:DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
       </edmx:DesignerInfoPropertySet>
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->
